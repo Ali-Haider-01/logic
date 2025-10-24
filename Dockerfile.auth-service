@@ -1,0 +1,8 @@
+FROM node:20-alpine
+
+RUN mkdir -p /var/www/auth-service
+WORKDIR /var/www/auth-service
+ADD . /var/www/auth-service
+RUN npm install -f 
+RUN npx nx build auth-service
+CMD ["node", "./dist/apps/auth-service/main.js"]
