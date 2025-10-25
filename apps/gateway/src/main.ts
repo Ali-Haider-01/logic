@@ -35,15 +35,25 @@ app.use(json({ limit: '50mb' }));
 /* Increased Form Data Size */
 app.use(urlencoded({ limit: '50mb', extended: true }));
 
-/* Health Check Redirect */
+/* Health Check */
 app.getHttpAdapter().get('/', (req: Request, res: Response) => {
-  return res.redirect('/health-check/view');
+  return res.json({ 
+    message: 'Gateway Service is running',
+    status: 'healthy',
+    timestamp: new Date().toISOString()
+  });
 });
 
-/* Added HTML Renderer Engine & Configurations */
-app.setViewEngine('ejs');
-app.useStaticAssets(join(__dirname, 'assets', 'public'));
-app.setBaseViewsDir(join(__dirname, 'assets', 'views'));
+app.getHttpAdapter().get('/health', (req: Request, res: Response) => {
+  return res.json({ 
+    message: 'Gateway Service is running',
+    status: 'healthy',
+    timestamp: new Date().toISOString()
+  });
+});
+
+/* Static assets configuration (if needed) */
+// app.useStaticAssets(join(__dirname, 'assets', 'public'));
 
 
   const swaggerConfig = new DocumentBuilder()

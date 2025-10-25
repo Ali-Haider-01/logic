@@ -15,7 +15,7 @@ export class ClassService {
           teacherName: 1,
           section: 1,
           subject: 1,
-          roomNumber: 18,
+          roomNumber: 1,
           _id: 1,
         },
       },

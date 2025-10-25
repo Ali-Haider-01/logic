@@ -28,6 +28,7 @@ services:
       - app-network
     depends_on:
       - rabbitmq
+      - mongodb
 
   class:
     container_name: class
@@ -41,6 +42,7 @@ services:
       - app-network
     depends_on:
       - rabbitmq
+      - mongodb
 
   student:
     container_name: student
@@ -54,6 +56,7 @@ services:
       - app-network
     depends_on:
       - rabbitmq
+      - mongodb
 
   rabbitmq:   # ✅ now inside services
     image: rabbitmq:3.12-management-alpine
@@ -63,6 +66,24 @@ services:
       - "15672:15672"
     networks:
       - app-network
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: logic-test
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
 
 networks:
   app-network:
