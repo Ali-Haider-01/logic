@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app/app.controller';
-import { AppService } from './app/app.service';
+import { GatewayController } from './app/gateway.controller';
+import { GatewayService } from './app/gateway.service';
 import { SERVICES } from '@shared/constants';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -9,7 +9,9 @@ import { ClientProxyFactory } from '@nestjs/microservices';
 
 @Module({
   imports: [
-    ConfigModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     ClientsModule.registerAsync(
       Object.values(SERVICES).map((SERVICE_NAME) => ({
         name: SERVICE_NAME,
@@ -28,7 +30,7 @@ import { ClientProxyFactory } from '@nestjs/microservices';
       }))
     ),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [GatewayController],
+  providers: [GatewayService],
 })
 export class GatewayModule {}

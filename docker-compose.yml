@@ -29,6 +29,32 @@ services:
     depends_on:
       - rabbitmq
 
+  class:
+    container_name: class
+    build:
+      context: ./
+      dockerfile: Dockerfile.class
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+
+  student:
+    container_name: student
+    build:
+      context: ./
+      dockerfile: Dockerfile.student
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+
   rabbitmq:   # ✅ now inside services
     image: rabbitmq:3.12-management-alpine
     container_name: rabbitmq

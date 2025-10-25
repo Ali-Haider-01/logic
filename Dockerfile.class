@@ -1,0 +1,8 @@
+FROM node:20-alpine
+
+RUN mkdir -p /var/www/class
+WORKDIR /var/www/class
+ADD . /var/www/class
+RUN npm install -f 
+RUN npx nx build class
+CMD ["node", "./dist/apps/class/main.js"]

@@ -1,5 +1,7 @@
 export const SERVICES = {
     AUTH_SERVICE: 'AUTH_SERVICE',
     GATEWAY: 'GATEWAY',
+    STUDENT: 'STUDENT',
+    CLASS: 'CLASS',
 };
 
