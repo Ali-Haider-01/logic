@@ -9,6 +9,7 @@ import {
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { ClassService } from './class.service';
 import { Auth, ClassDto, MESSAGE_PATTERNS } from '@logic-test/shared';
+import { MessagePattern } from '@nestjs/microservices';
 
 const {
   GET_CLASS,
@@ -21,24 +22,24 @@ const {
 @ApiBearerAuth()
 @Auth()
 export class ClassController {
-  constructor(private readonly classService: ClassService) {}
+  constructor(private readonly classService: ClassService) { }
 
-  @Get('get-class')
+  @MessagePattern(GET_CLASS)
   getClass() {
     return this.classService.getClass();
   }
 
-  @Get('get-single-class/:id')
+  @MessagePattern(GET_SINGLE_CLASS)
   getClassById(@Param('id') id: string) {
     return this.classService.getClassById(id);
   }
 
-  @Post('add-class')
+  @MessagePattern(ADD_CLASS)
   postClass(@Body() classDto: ClassDto) {
     return this.classService.postClass(classDto);
   }
 
-  @Delete('delete-class/:id')
+  @MessagePattern(DELETE_CLASS)
   deleteClass(@Param('id') id: string) {
     return this.classService.deleteClass(id);
   }
