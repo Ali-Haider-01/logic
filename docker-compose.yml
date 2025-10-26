@@ -58,6 +58,20 @@ services:
       - rabbitmq
       - mongodb
 
+  course:
+    container_name: course
+    build:
+      context: ./
+      dockerfile: Dockerfile.course
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - app-network
+    depends_on:
+      - rabbitmq
+      - mongodb   
+
   rabbitmq:   # ✅ now inside services
     image: rabbitmq:3.12-management-alpine
     container_name: rabbitmq

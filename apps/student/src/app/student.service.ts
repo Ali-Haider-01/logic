@@ -34,6 +34,14 @@ export class StudentService {
         },
       },
       {
+        $lookup: {
+          from: 'courses',
+          localField: 'courseIds',
+          foreignField: '_id',
+          as: 'courseDetails',
+        },
+      },
+      {
         $unwind: {
           path: '$classDetails',
           preserveNullAndEmptyArrays: true,
@@ -52,10 +60,15 @@ export class StudentService {
           classDetails: {
             _id: 1,
             name: 1,
-            teacherName: 1,
             section: 1,
             subject: 1,
             roomNumber: 1,
+          },
+          courseDetails: {
+            _id: 1,
+            name: 1,
+            teacherName: 1,
+            price: 1,
           },
         },
       },
@@ -86,6 +99,14 @@ export class StudentService {
           },
         },
         {
+          $lookup: {
+            from: 'courses',
+            localField: 'courseIds',
+            foreignField: '_id',
+            as: 'courseDetails',
+          },
+        },
+        {
           $unwind: {
             path: '$classDetails',
             preserveNullAndEmptyArrays: true,
@@ -104,10 +125,15 @@ export class StudentService {
             classDetails: {
               _id: 1,
               name: 1,
-              teacherName: 1,
               section: 1,
               subject: 1,
               roomNumber: 1,
+            },
+            courseDetails: {
+              _id: 1,
+              name: 1,
+              teacherName: 1,
+              price: 1,
             },
           },
         },

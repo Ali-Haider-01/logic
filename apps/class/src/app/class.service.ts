@@ -12,7 +12,6 @@ export class ClassService {
       {
         $project: {
           name: 1,
-          teacherName: 1,
           section: 1,
           subject: 1,
           roomNumber: 1,
@@ -33,7 +32,6 @@ export class ClassService {
         {
           $project: {
             name: 1,
-            teacherName: 1,
             section: 1,
             subject: 1,
             roomNumber: 1,

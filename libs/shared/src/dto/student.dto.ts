@@ -6,6 +6,7 @@ import {
   IsOptional,
   IsString,
   ValidateNested,
+  IsArray,
 } from 'class-validator';
 
 class AddressDto {
@@ -59,6 +60,16 @@ export class StudentDto {
   @IsOptional()
   @IsString()
   classId?: string;
+
+  @ApiProperty({ 
+    example: ['64a823fab7f481d3be03d5b6', '64a823fab7f481d3be03d5b7'],
+    type: [String],
+    description: 'Array of course IDs'
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  courseIds?: string[];
 }
 
 export class StudentFilterDto {

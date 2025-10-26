@@ -11,8 +11,16 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { StudentService } from './student.service';
-import { Auth, StudentDto, StudentFilterDto } from '@logic-test/shared';
+import { Auth, MESSAGE_PATTERNS, StudentDto, StudentFilterDto } from '@logic-test/shared';
 
+const {
+  ALL_STUDENTS,
+  SINGLE_STUDENT,
+  ADD_STUDENT,
+  PUT_STUDENT,
+  PATCH_STUDENT,
+  DELETE_STUDENT,
+} = MESSAGE_PATTERNS.STUDENT;
 @Controller('student')
 @ApiBearerAuth()
 @Auth()

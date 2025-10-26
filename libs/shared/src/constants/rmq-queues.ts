@@ -3,5 +3,6 @@ export const SERVICES = {
     GATEWAY: 'GATEWAY',
     STUDENT: 'STUDENT',
     CLASS: 'CLASS',
+    COURSE:'COURSE',
 };
 

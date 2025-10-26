@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { GatewayModule } from './gateway.module';
@@ -17,44 +12,43 @@ async function bootstrap() {
   const config = app.get<ConfigService>(ConfigService);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
- 
-/* CORS Configuration */
-app.enableCors({
-  origin: '*',
-});
 
-/* Removed Express Powered By */
-app.disable('x-powered-by');
-
-/* Removed 304 Redirects */
-app.disable('etag');
-
-/* Increased JSON Body Size */
-app.use(json({ limit: '50mb' }));
-
-/* Increased Form Data Size */
-app.use(urlencoded({ limit: '50mb', extended: true }));
-
-/* Health Check */
-app.getHttpAdapter().get('/', (req: Request, res: Response) => {
-  return res.json({ 
-    message: 'Gateway Service is running',
-    status: 'healthy',
-    timestamp: new Date().toISOString()
+  /* CORS Configuration */
+  app.enableCors({
+    origin: '*',
   });
-});
 
-app.getHttpAdapter().get('/health', (req: Request, res: Response) => {
-  return res.json({ 
-    message: 'Gateway Service is running',
-    status: 'healthy',
-    timestamp: new Date().toISOString()
+  /* Removed Express Powered By */
+  app.disable('x-powered-by');
+
+  /* Removed 304 Redirects */
+  app.disable('etag');
+
+  /* Increased JSON Body Size */
+  app.use(json({ limit: '50mb' }));
+
+  /* Increased Form Data Size */
+  app.use(urlencoded({ limit: '50mb', extended: true }));
+
+  /* Health Check */
+  app.getHttpAdapter().get('/', (req: Request, res: Response) => {
+    return res.json({
+      message: 'Gateway Service is running',
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+    });
   });
-});
 
-/* Static assets configuration (if needed) */
-// app.useStaticAssets(join(__dirname, 'assets', 'public'));
+  app.getHttpAdapter().get('/health', (req: Request, res: Response) => {
+    return res.json({
+      message: 'Gateway Service is running',
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+    });
+  });
 
+  /* Static assets configuration (if needed) */
+  // app.useStaticAssets(join(__dirname, 'assets', 'public'));
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('API')
@@ -67,9 +61,8 @@ app.getHttpAdapter().get('/health', (req: Request, res: Response) => {
   SwaggerModule.setup('api', app, documentFactory, {
     swaggerOptions: { persistAuthorization: true },
   });
-  
+
   await app.listen(config.get('GATEWAY_PORT'));
- 
 }
 
 bootstrap();

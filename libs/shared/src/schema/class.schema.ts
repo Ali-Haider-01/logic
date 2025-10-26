@@ -5,8 +5,6 @@ import { Document } from 'mongoose';
 export class Class extends Document {
   @Prop({ required: true })
   name?: string;
-  @Prop()
-  teacherName?: string;
   @Prop({ required: true })
   section?: string;
   @Prop()

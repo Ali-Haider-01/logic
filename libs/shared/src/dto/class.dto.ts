@@ -19,12 +19,6 @@ export class ClassDto {
   })
   roomNumber: number;
 
-  @IsString()
-  @ApiProperty({
-    example: 'amir',
-    type: String,
-  })
-  teacherName?: string;
 
   @IsString()
   @ApiProperty({

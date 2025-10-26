@@ -8,7 +8,14 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { ClassService } from './class.service';
-import { Auth, ClassDto } from '@logic-test/shared';
+import { Auth, ClassDto, MESSAGE_PATTERNS } from '@logic-test/shared';
+
+const {
+  GET_CLASS,
+  GET_SINGLE_CLASS,
+  ADD_CLASS,
+  DELETE_CLASS
+} = MESSAGE_PATTERNS.CLASS;
 
 @Controller('class')
 @ApiBearerAuth()

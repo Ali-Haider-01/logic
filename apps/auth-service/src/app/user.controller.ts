@@ -14,12 +14,23 @@ import {
   EmailDto,
   ForgotPasswordDto,
   LogInDto,
+  MESSAGE_PATTERNS,
   RefreshTokenDto,
   UserDto,
 } from '@logic-test/shared';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
+const {
+  SIGN_UP,
+  LOG_IN,
+  GENERATE_OTP,
+  FORGOT_PASSWORD,
+  REFRESH_TOKEN,
+  GET_PROFILE,
+  CHANGE_PASSWORD,
+  LOG_OUT,
+} = MESSAGE_PATTERNS.USER;
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}

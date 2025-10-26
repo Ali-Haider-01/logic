@@ -22,6 +22,8 @@ export class Student extends Document {
   rollNumber: number;
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Class' })
   classId?: string;
+  @Prop({ type: [MongooseSchema.Types.ObjectId], ref: 'Course' })
+  courseIds?: string[];
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
